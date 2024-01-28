@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Order</title>
+</head>
+<body>
+<form action="#" th:action="@{/OrderUpdateForm}" th:object="${order}" method="POST"}>
+    <p><input type="hidden" th:field="*{id}"/></p>
+
+    <p><input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4"/></p>
+
+    <p><input type="text" path="price" th:field="*{total}" placeholder= "Price" class="form-control mb-4 col-4"/></p>
+    <!--<p th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</p>-->
+
+
+    <!--<p th:if="${#fields.hasErrors('inv')}" th:errors="*{inv}">Inventory Error</p>-->
+
+    <br>
+    <p th:if="${#fields.hasAnyErrors()}" th:each="err : ${#fields.allErrors()}" th:text="${err}">Errors</p>
+    <br>
+
+
+
+    <p><input type="submit" value="Submit" /></p>
+</form>
+<a href="http://localhost:8080/mainscreen">Link
+    to Main Screen</a>
+</body>
+</html>

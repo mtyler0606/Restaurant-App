@@ -1,0 +1,68 @@
+<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Order</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Add New Order</h1>
+<form action="#" th:action="@{/AddOrder}" th:object="${order}" method="POST" }>
+
+    <!-- Add hidden form field to handle update -->
+    <p><input type="text" th:field="*{id}" placeholder="Id"/></p>
+
+    <p><input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4"/></p>
+
+
+    <br>
+    <p th:if="${#fields.hasAnyErrors()}" th:each="err : ${#fields.allErrors()}" th:text="${err}">Errors</p>
+    <br>
+
+
+
+    <p><input type="submit" value="Submit" /></p>
+</form>
+<p><errors path="price" cssClass=""error/><p>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <h2>Add Ingredients</h2>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Inventory</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tempSandwich: ${availableSandwiches}">
+        <td th:text="${tempSandwich.name}">1</td>
+        <td th:text="${tempSandwich.basePrice}">1</td>
+        <td th:text="${tempSandwich.inv}">1</td>
+        <td><a th:href="@{/AddIngredientToSandwich(IngredientID=${tempIngredient.id})}" class="btn btn-primary btn-sm mb-3">Add</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table class="table table-bordered table-striped">
+    <h2>Added Sandwiches</h2>
+    <thead class="thead-dark">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tempSandwich : ${addedSandwiches}">
+        <td th:text="${tempSandwich.name}">1</td>
+        <td th:text="${tempSandwich.basePrice}">1</td>
+        <td><a th:href="@{/RemoveIngredientFromSandwich(ingredientID=${tempIngredient.id})}"  class="btn btn-primary btn-sm mb-3">Remove</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+    <a href="http://localhost:8080/mainscreen">Link
+        to Main Screen</a>
+</body>
+</html>

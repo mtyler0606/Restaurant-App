@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Sandwich</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Add Sandwich</h1>
+<form action="#" th:action="@{/SaveSandwichNewOrder}" th:object="${sandwich}" method="POST" }>
+
+    <!-- Add hidden form field to handle update
+    <p><input type="text" th:field="*{id}" placeholder="Id"/></p>
+
+    <p><input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4"/></p>
+
+    <p><input type="text" path="price" th:field="*{basePrice}" placeholder= "Price" class="form-control mb-4 col-4"/></p>
+    <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</p>
+    <p><input type="text" path="price" th:field="*{totalPrice}" placeholder= "Price" class="form-control mb-4 col-4"/></p>
+    <p><input type="text" path="inv" th:field="*{inv}" placeholder="Inventory" class="form-control mb-4 col-4"/></p>
+    <p th:if="${#fields.hasErrors('inv')}" th:errors="*{inv}">Inventory Error</p>-->
+    <p>Bread</p>
+    <input type="radio" th:field="*{bread}"
+           th:each="tempBread : ${breads}"
+           th:value="${tempBread}"
+           th:text="${tempBread}" />
+    <br>
+    <p>Meat/Protein</p>
+    <input type="radio" th:field="*{protein}"
+           th:each="tempProtein : ${proteins}"
+           th:value="${tempProtein}"
+           th:text="${tempProtein}" />
+    <br>
+    <p>Cheese</p>
+    <input type="radio" th:field="*{cheese}"
+               th:each="tempCheese : ${cheeses}"
+               th:value="${tempCheese}"
+               th:text="${tempCheese}" />
+    <br>
+    <p>Sauce</p>
+    <input type="radio" th:field="*{sauce}"
+           th:each="tempSauce : ${sauces}"
+           th:value="${tempSauce}"
+           th:text="${tempSauce}" />
+    <br>
+    <p>Extras</p>
+    <input type="checkbox" th:field="*{lettuce}" th:value=true>Lettuce</input>
+    <input type="checkbox" th:field="*{tomato}" th:value=true>Tomato</input>
+    <input type="checkbox" th:field="*{pickles}" th:value=true>Pickles</input>
+    <!--
+    <<input type="checkbox" th:field="*{getToppings()}"
+               th:each = "tempTopping : ${availableToppings}"
+               th:value="${tempTopping}"
+               th:text="${tempTopping}"/>
+
+
+        <input type="checkbox" th:field="*{toppings}" th:value="Extra Cheese">Extra Cheese</input>
+        <input type="checkbox" th:field="*{toppings}" th:value="Green Peppers">Green Peppers</input>
+        <input type="checkbox" th:field="*{toppings}" th:value="Olives">Olives</input>
+        <input type="checkbox" th:field="*{toppings}" th:value="Mushrooms">Mushrooms</input>
+          <p><input type="text" th:field="*{ingredientID}" placeholder="Part ID" class="form-control mb-4 col-4"/></p> -->
+    <br>
+    <p th:if="${#fields.hasAnyErrors()}" th:each="err : ${#fields.allErrors()}" th:text="${err}">Errors</p>
+    <br>
+
+
+
+    <p><input type="submit" value="Submit" /></p>
+</form>
+<p><errors path="price" cssClass=""error/><p>
+
+    <a href="http://localhost:8080/mainscreen">Link
+        to Main Screen</a>
+</body>
+</html>

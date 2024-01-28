@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Sandwich</title>
+</head>
+<body>
+<form action="#" th:action="@{/AddSandwich}" th:object="${sandwich}" method="POST"}>
+  <p>Bread</p>
+  <input type="radio" th:field="*{bread}"
+         th:each="tempBread : ${breads}"
+         th:value="${tempBread}"
+         th:text="${tempBread}" />
+  <br>
+  <p>Meat/Protein</p>
+  <input type="radio" th:field="*{protein}"
+         th:each="tempProtein : ${proteins}"
+         th:value="${tempProtein}"
+         th:text="${tempProtein}" />
+  <br>
+  <p>Cheese</p>
+  <input type="radio" th:field="*{cheese}"
+         th:each="tempCheese : ${cheeses}"
+         th:value="${tempCheese}"
+         th:text="${tempCheese}" />
+  <br>
+  <p>Sauce</p>
+  <input type="radio" th:field="*{sauce}"
+         th:each="tempSauce : ${sauces}"
+         th:value="${tempSauce}"
+         th:text="${tempSauce}" />
+  <br>
+  <p>Extras</p>
+  <input type="checkbox" th:field="*{lettuce}" th:value=true>Lettuce</input>
+  <input type="checkbox" th:field="*{tomato}" th:value=true>Tomato</input>
+  <input type="checkbox" th:field="*{pickles}" th:value=true>Pickles</input>
+  <br>
+  <p th:if="${#fields.hasAnyErrors()}" th:each="err : ${#fields.allErrors()}" th:text="${err}">Errors</p>
+  <br>
+
+
+
+  <p><input type="submit" value="Submit" /></p>
+</form>
+
+<a href="http://localhost:8080/mainscreen">Link
+  to Main Screen</a>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Ingredients to Sandwich</title>
+</head>
+<body>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <h2>Add Ingredients</h2>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Inventory</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tempIngredient : ${Ingredients}">
+        <td th:text="${tempIngredient.name}">1</td>
+        <td th:text="${tempIngredient.price}">1</td>
+        <td th:text="${tempIngredient.inv}">1</td>
+        <td><a th:href="@{/AddIngredientToSandwich(IngredientID=${tempIngredient.id})}" class="btn btn-primary btn-sm mb-3">Add</a>
+        </td>
+    </tr>
+    </tbody>
+</table><!--
+   <input type="checkbox" th:field="${addedIngredients}"
+           th:each="tempIngredient: ${Ingredients}"
+           th:value="${tempIngredient.id}"
+           th:text="${tempIngredient.name}">
+    <input type="submit" value="Submit"> -->
+</body>
+</html>

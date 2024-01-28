@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Sandwich Shop</title>
+</head>
+<body>
+<h1>Sandwich Shop</h1>
+
+<h2>Open Orders</h2>
+<a th:href="@{/StartNewOrder}" class="btn btn-primary btn-sm mb-3" >Start New Order</a>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Order Number</th>
+        <th>Number of Sandwiches</th>
+        <th>Order Complete</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tempOrder: ${openOrders}">
+        <td th:text="${tempOrder.id}">1</td>
+        <td th:text="${tempOrder.getSandwiches().size()}">1</td>
+        <td th:text="${tempOrder.completed}">1</td>
+
+        <td><!--<a th:href="@{/OrderUpdateForm(OrderID=${tempOrder.id})}" >Update</a> -->
+            <a th:href="@{/AddNewSandwichToOrder(OrderID=${tempOrder.id})}" class="btn btn-primary btn-sm mb-3">Add Sandwich</a>
+            <a th:href="@{/OrderComplete(OrderID=${tempOrder.id})}" class="btn btn-primary btn-sm mb-3">Mark Order Finished</a>
+            <a th:href="@{/deleteOrder(OrderID=${tempOrder.id})}" class="btn btn-primary btn-sm mb-3"
+               onclick="if(!(confirm('Are you sure you want to delete this ingredient?')))return false">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h2>Closed Orders</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Order Number</th>
+        <th>Number of Sandwiches</th>
+        <th>Order Complete</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tempOrder: ${closedOrders}">
+        <td th:text="${tempOrder.id}">1</td>
+        <td th:text="${tempOrder.getSandwiches().size()}">1</td>
+        <td th:text="${tempOrder.completed}">1</td>
+
+        <td><!--<a th:href="@{/OrderUpdateForm(OrderID=${tempOrder.id})}" >Update</a> -->
+            <a th:href="@{/deleteOrder(OrderID=${tempOrder.id})}" class="btn btn-primary btn-sm mb-3"
+               onclick="if(!(confirm('Are you sure you want to delete this ingredient?')))return false">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Open Sandwiches</h2>
+<!--<a th:href="@{/AddSandwich}">Add New Sandwich</a> -->
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Sandwich Number</th>
+        <th>Bread</th>
+        <th>Protein</th>
+        <th>Cheese</th>
+        <th>Sauce</th>
+        <th>Lettuce</th>
+        <th>Tomato</th>
+        <th>Pickles</th>
+        <th>Finished</th>
+        <th>Order Number</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tempSandwich: ${openSandwiches}">
+        <td th:text="${tempSandwich.id}">1</td>
+        <td th:text="${tempSandwich.bread}">1</td>
+        <td th:text="${tempSandwich.protein}">1</td>
+        <td th:text="${tempSandwich.cheese}">1</td>
+        <td th:text="${tempSandwich.sauce}">1</td>
+        <td th:text="${tempSandwich.lettuce}">1</td>
+        <td th:text="${tempSandwich.tomato}">1</td>
+        <td th:text="${tempSandwich.pickles}">1</td>
+        <td th:text="${tempSandwich.completed}">1</td>
+        <td th:text="${tempSandwich.order.id}">1</td>
+
+        <td><a th:href="@{/sandwichUpdate(SandwichID=${tempSandwich.id})}" class="btn btn-primary btn-sm mb-3">Update</a>
+            <a th:href="@{/sandwichComplete(SandwichID=${tempSandwich.id})}" class="btn btn-primary btn-sm mb-3">Mark Sandwich Complete</a>
+            <a th:href="@{/deleteSandwich(SandwichID=${tempSandwich.id})}" class="btn btn-primary btn-sm mb-3"
+               onclick="if(!(confirm('Are you sure you want to delete this ingredient?')))return false">Delete</a>
+            <!--  <a th:href="@{/newAddIngredients(sandwichID=${tempSandwich.id})}" >Add Ingredients</a> -->
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h2>Closed Sandwiches</h2>
+<!--<a th:href="@{/AddSandwich}">Add New Sandwich</a> -->
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Sandwich Number</th>
+        <th>Bread</th>
+        <th>Protein</th>
+        <th>Cheese</th>
+        <th>Sauce</th>
+        <th>Lettuce</th>
+        <th>Tomato</th>
+        <th>Pickles</th>
+        <th>Finished</th>
+        <th>Order Number</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tempSandwich: ${closedSandwiches}">
+        <td th:text="${tempSandwich.id}">1</td>
+        <td th:text="${tempSandwich.bread}">1</td>
+        <td th:text="${tempSandwich.protein}">1</td>
+        <td th:text="${tempSandwich.cheese}">1</td>
+        <td th:text="${tempSandwich.sauce}">1</td>
+        <td th:text="${tempSandwich.lettuce}">1</td>
+        <td th:text="${tempSandwich.tomato}">1</td>
+        <td th:text="${tempSandwich.pickles}">1</td>
+        <td th:text="${tempSandwich.completed}">1</td>
+        <td th:text="${tempSandwich.order.id}">1</td>
+        <!--    <td th:text="${tempSandwich.order.id}">1</td> -->
+
+        <td>            <a th:href="@{/deleteSandwich(SandwichID=${tempSandwich.id})}" class="btn btn-primary btn-sm mb-3"
+               onclick="if(!(confirm('Are you sure you want to delete this ingredient?')))return false">Delete</a>
+            <!--  <a th:href="@{/newAddIngredients(sandwichID=${tempSandwich.id})}" >Add Ingredients</a> -->
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>All Orders</h2>
+<a th:href="@{/StartNewOrder}">Start New Order</a>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Order Number</th>
+        <th>Number of Sandwiches</th>
+        <th>Order Complete</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tempOrder: ${orders}">
+        <td th:text="${tempOrder.id}">1</td>
+        <td th:text="${tempOrder.getSandwiches().size()}">1</td>
+        <td th:text="${tempOrder.completed}">1</td>
+
+        <td><!--<a th:href="@{/OrderUpdateForm(OrderID=${tempOrder.id})}" >Update</a> -->
+            <a th:href="@{/AddNewSandwichToOrder(OrderID=${tempOrder.id})}" class="btn btn-primary btn-sm mb-3">Add Sandwich</a>
+            <a th:href="@{/OrderComplete(OrderID=${tempOrder.id})}" class="btn btn-primary btn-sm mb-3">Mark Order Finished</a>
+            <a th:href="@{/deleteOrder(OrderID=${tempOrder.id})}" class="btn btn-primary btn-sm mb-3"
+               onclick="if(!(confirm('Are you sure you want to delete this ingredient?')))return false">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h2>All Sandwiches</h2>
+<!--<a th:href="@{/AddSandwich}">Add New Sandwich</a> -->
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Sandwich Number</th>
+        <th>Bread</th>
+        <th>Protein</th>
+        <th>Cheese</th>
+        <th>Sauce</th>
+        <th>Lettuce</th>
+        <th>Tomato</th>
+        <th>Pickles</th>
+        <th>Finished</th>
+        <th>Order Number</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tempSandwich: ${sandwiches}">
+        <td th:text="${tempSandwich.id}">1</td>
+        <td th:text="${tempSandwich.bread}">1</td>
+        <td th:text="${tempSandwich.protein}">1</td>
+        <td th:text="${tempSandwich.cheese}">1</td>
+        <td th:text="${tempSandwich.sauce}">1</td>
+        <td th:text="${tempSandwich.lettuce}">1</td>
+        <td th:text="${tempSandwich.tomato}">1</td>
+        <td th:text="${tempSandwich.pickles}">1</td>
+        <td th:text="${tempSandwich.completed}">1</td>
+    <!--    <td th:text="${tempSandwich.order.id}">1</td> -->
+
+        <td><a th:href="@{/sandwichUpdate(SandwichID=${tempSandwich.id})}" class="btn btn-primary btn-sm mb-3">Update</a>
+            <a th:href="@{/deleteSandwich(SandwichID=${tempSandwich.id})}" class="btn btn-primary btn-sm mb-3"
+               onclick="if(!(confirm('Are you sure you want to delete this ingredient?')))return false">Delete</a>
+            <!--  <a th:href="@{/newAddIngredients(sandwichID=${tempSandwich.id})}" >Add Ingredients</a> -->
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Sandwich to Order</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<h1>Add Sandwich to Order</h1>
+<form action="#" th:action="@{/AddNewSandwichToOrder}" th:object="${sandwich}" method="POST" }>
+
+
+<!--  <p><input type="text" path="order.name" th:field="*{order.name}" placeholder="order name" class="form-control mb-4 col-4"/></p>
+  <p th:if="${#fields.hasErrors('inv')}" th:errors="*{inv}">Inventory Error</p>-->
+
+
+  <!--  <p><input type="text" th:field="*{ingredientID}" placeholder="Part ID" class="form-control mb-4 col-4"/></p> -->
+
+  <p th:if="${#fields.hasAnyErrors()}" th:each="err : ${#fields.allErrors()}" th:text="${err}">Errors</p>
+<div class="checkbox">
+  <label>Order Number</label><input type="checkbox" th:field="${sandwich.helper}" th:value="${ID}" th:text="${ID}" checked >
+</div>
+  <br>
+
+  <p>Bread</p>
+  <input type="radio" th:field="*{bread}"
+         th:each="tempBread : ${breads}"
+         th:value="${tempBread}"
+         th:text="${tempBread}" />
+  <br>
+  <p>Meat/Protein</p>
+  <input type="radio" th:field="*{protein}"
+         th:each="tempProtein : ${proteins}"
+         th:value="${tempProtein}"
+         th:text="${tempProtein}" />
+  <br>
+  <p>Cheese</p>
+  <input type="radio" th:field="*{cheese}"
+         th:each="tempCheese : ${cheeses}"
+         th:value="${tempCheese}"
+         th:text="${tempCheese}" />
+  <br>
+  <p>Sauce</p>
+  <input type="radio" th:field="*{sauce}"
+         th:each="tempSauce : ${sauces}"
+         th:value="${tempSauce}"
+         th:text="${tempSauce}" />
+  <br>
+  <p>Extras</p>
+  <input type="checkbox" th:field="*{lettuce}" th:value=true>Lettuce</input>
+  <input type="checkbox" th:field="*{tomato}" th:value=true>Tomato</input>
+  <input type="checkbox" th:field="*{pickles}" th:value=true>Pickles</input>
+
+
+  <p><input type="submit" value="Submit" /></p>
+</form>
+<p><errors path="price" cssClass=""error/><p>
+
+  <a href="http://localhost:8080/mainscreen">Link
+    to Main Screen</a>
+
+</body>
+</html>
